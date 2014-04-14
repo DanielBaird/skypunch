@@ -14,6 +14,7 @@ var path = require('path');
 var cssSourcePaths = ['src/css/**/*.less'];
 var jsSourcePaths = ['src/js/**/*.js'];
 var htmlSourcePaths = ['src/html/index.html'];
+var staticSourcePaths = ['src/lib/**'];
 var jsRoots = ['src/js/skypunch.js'];
 
 // utility functions ================================================
@@ -66,7 +67,7 @@ gulp.task('default', ['build', 'watch'], function() {
 });
 
 // --------------------------------------------- build ALL the things
-gulp.task('build', ['cssbuild', 'jsbuild', 'htmlbuild']);
+gulp.task('build', ['cssbuild', 'jsbuild', 'htmlbuild', 'staticbuild']);
 
 // -------------------------------------------- react to file updates
 gulp.task('watch', function() {
@@ -80,9 +81,15 @@ gulp.task('watch', function() {
         .on('change', adviseOfEvent('Copying'));
 });
 
-// ------------------------------------------------------ compile css
+// -------------------------------------------------------- copy html
 gulp.task('htmlbuild', function() {
     return gulp.src(htmlSourcePaths)
+        .pipe(gulp.dest('dist')) ;
+});
+
+// ------------------------------------------------------- copy stuff
+gulp.task('staticbuild', function() {
+    return gulp.src(staticSourcePaths)
         .pipe(gulp.dest('dist')) ;
 });
 
