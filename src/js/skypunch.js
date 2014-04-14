@@ -6,7 +6,7 @@ var keys = [];
 var players = [];
 
 // this function starts the game..
-function go() {
+function skypunch() {
 
     player = robotPlayerMaker(5, 80, 15);
     player.setPlayerDom($('.robot.player0'));
@@ -17,8 +17,6 @@ function go() {
     opponent.setPlayerDom($('.robot.player1'));
     opponent.setHealthBarDom($('.health.player1'));
     players.push(opponent);
-
-    console.log(players);
 
     $('body').on('keydown', function(event) {
         var key = event.which;
@@ -36,6 +34,8 @@ function go() {
 
     setInterval(tick, 50);
 }
+
+window.skypunch = skypunch;
 
 // periodically process events
 function tick() {
@@ -122,6 +122,3 @@ function smallHit(playerId) {
 function bigHit(playerId) {
     hit(playerId, 2);
 }
-
-// now kick it all off..
-$( go );

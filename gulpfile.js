@@ -14,7 +14,7 @@ var path = require('path');
 var cssSourcePaths = ['src/css/**/*.less'];
 var jsSourcePaths = ['src/js/**/*.js'];
 var htmlSourcePaths = ['src/html/index.html'];
-var staticSourcePaths = ['src/lib/**'];
+var staticSourcePaths = ['static/**'];
 var jsRoots = ['src/js/skypunch.js'];
 
 // utility functions ================================================
