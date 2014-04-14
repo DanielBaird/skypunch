@@ -11,6 +11,19 @@ div.gamescreen {
   height: 300px;
   width: 500px;
 }
+div.loadingscreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+div.loadingscreen img {
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin: 10px;
+}
 div.robot {
   position: absolute;
   -webkit-background-size: 100% 100%;
