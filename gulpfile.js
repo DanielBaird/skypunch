@@ -92,15 +92,15 @@ gulp.task('cssbuild', ['cssclean'], function() {
         .pipe(plugins.less())
         .on('error', bail)
         .pipe(plugins.autoprefixer("> 1%", "last 3 versions", "ie > 7", "ff > 20", "Opera 12.1"))
-        .pipe(gulp.dest('static/css/'))
+        .pipe(gulp.dest('dist/'))
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(plugins.minifyCss())
-        .pipe(gulp.dest('static/css/')) ;
+        .pipe(gulp.dest('dist/')) ;
 });
 
 // ------------------------------------------------- delete built css
 gulp.task('cssclean', function() {
-    return gulp.src(['static/css/*.css'], {read: false})
+    return gulp.src(['dist/*.css'], {read: false})
         .pipe(plugins.clean());
 });
 
@@ -111,15 +111,15 @@ gulp.task('jsbuild', ['jsclean'], function() {
             debug: !gutil.env.production
         }))
         .on('error', bail)
-        .pipe(gulp.dest('climasng/static/js/'))
+        .pipe(gulp.dest('dist/'))
         .pipe(plugins.rename({suffix: '.min'}))
         .pipe(plugins.uglify())
-        .pipe(gulp.dest('climasng/static/js/')) ;
+        .pipe(gulp.dest('dist/')) ;
 });
 
 // -------------------------------------------------- delete built js
 gulp.task('jsclean', function() {
-    return gulp.src('static/js/**/*.js', {read: false})
+    return gulp.src('dist/*.js', {read: false})
         .pipe(plugins.clean()) ;
 });
 
