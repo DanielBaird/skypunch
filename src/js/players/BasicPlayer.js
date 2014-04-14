@@ -12,7 +12,7 @@ function Player(type, health, position, height) {
     this.position = position || 80;
     this.height = height || 15;
     this.health = health || 5;
-    this.dirty = ['pic', 'position', 'height'];
+    this.dirty = ['pic', 'position', 'height', 'health'];
 
     this.dom = null;
 }

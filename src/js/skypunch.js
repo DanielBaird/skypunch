@@ -1,6 +1,7 @@
 
 var robotPlayerMaker = require('./players/robotPlayer');
 var aiPlayerMaker = require('./players/robotAI');
+var punchingBagMaker = require('./players/robotPunchBag');
 
 var keys = [];
 var players = [];
@@ -8,12 +9,17 @@ var players = [];
 // this function starts the game..
 function skypunch() {
 
+    $('.loadingscreen').fadeOut(900, function() {
+        // ...
+    });
+
     player = robotPlayerMaker(5, 80, 15);
     player.setPlayerDom($('.robot.player0'));
     player.setHealthBarDom($('.health.player0'));
     players.push(player);
 
     opponent = aiPlayerMaker(5, 320, 20);
+    opponent = punchingBagMaker(10, 320, 20);
     opponent.setPlayerDom($('.robot.player1'));
     opponent.setHealthBarDom($('.health.player1'));
     players.push(opponent);
@@ -82,43 +88,4 @@ function tick() {
         // the possibly-updated player now.
         player.draw();
     }
-}
-
-
-// hitting --------------------------------------------------
-
-function hit(playerId, size) {
-    var player = players[playerId];
-    // look through other players, finding players in range
-    for (opponentId in players) {
-        if (opponentId == playerId) {
-            continue;
-        }
-        var opponent = players[opponentId];
-        var near = player.position + (player.direction * 10);
-        var far = player.position + (player.direction * 100);
-        if (
-               (opponent.position < Math.max(near, far))
-            && (opponent.position > Math.min(near, far))
-        ) {
-            // he's in range of our hit
-            opponent.currentAction = 'gethurt' + (player.direction == 1 ? 'Right' : 'Left');
-            opponent.health -= size;
-            $('.health.player' + opponentId).css('width', (20 * opponent.health) + 'px');
-            opponent.nextStep = 0;
-            if (opponent.health <= 0) {
-                opponent.currentAction = 'dead';
-                player.currentAction = 'winner';
-                player.nextStep = 0;
-            }
-        }
-    }
-}
-
-function smallHit(playerId) {
-    hit(playerId, 1);
-}
-
-function bigHit(playerId) {
-    hit(playerId, 2);
 }
